@@ -20,6 +20,19 @@ public:
     List(){
         this->head = NULL;
     }
+
+    bool find(T data, Node<T>* &p){
+        Node<T> *tmp = this->head;
+        Node<T> *prev = NULL;
+        while(tmp){
+            if (tmp->data == data) return 0;
+            prev = tmp;
+            tmp = tmp->next;
+        }
+        tmp = p;
+        return tmp;
+    }
+
     void insert(T data){
         if(!head){
             head = new Node<T>(data);
@@ -56,6 +69,28 @@ public:
         this->head = prev;
     }
 
+    void sort(){
+        Node<T>* temp = this->head;
+        while (temp != NULL) {
+            Node<T>* temp2 = temp;
+
+            while (temp2 != NULL) {
+                if (temp->data > temp2->data) {
+                    T temp3;
+                    temp3 = temp->data;
+                    temp->data = temp2->data;
+                    temp2->data = temp3;
+                }
+
+                temp2 = temp2->next;
+            }
+
+            temp = temp->next;
+        }
+
+
+    }
+
 };
 
 
@@ -66,8 +101,11 @@ int main (int argc, char *argv[]) {
     a.insert(24);
     a.insert(31);
     a.insert(21);
-//  a.print();
+    //  a.print();
     a.reverse();
+    a.print();
+    cout << endl << endl;
+    a.sort();
     a.print();
     //cout << a.head->data << endl;
     return 0;
